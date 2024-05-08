@@ -24,3 +24,6 @@ var b = 10;
 console.log(--a); //4
 console.log(b--); // 10
 console.log(b); // 9
+
+console.log(50+40+"30");
+   console.log("20"+30+40);
