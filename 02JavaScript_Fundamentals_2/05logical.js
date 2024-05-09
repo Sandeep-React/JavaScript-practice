@@ -8,7 +8,7 @@
 !  --> Change true to false and false to true
 */
 
-(3 < 1 || 4 == 4)? console.log("true statement"): console.log("false statement");
+(3 < 1 || 4 == 4)? console.log("true statement"): console.log("false statement"); //semicolon is essential  
 //false || true -- true
 
 (3 < 1 && 4 == 4)? console.log("true statement"): console.log("false statement")

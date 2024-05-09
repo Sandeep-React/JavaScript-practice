@@ -15,5 +15,5 @@ false ? console.log("true statement") : console.log("false statement");
 
 // find if a number is even or odd
 
- let num = 11;
+ let num = 11;// ; is essential here
 (num % 2 == 0) ? console.log("Even number") : console.log("Odd Number")
