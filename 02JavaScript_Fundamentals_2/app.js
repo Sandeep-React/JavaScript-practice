@@ -26,3 +26,5 @@ var y =  10 % '5';
    } else {
        console.log("parseInt converts a string to number");
    }
+
+   console.log("19" < 1)
