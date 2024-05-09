@@ -6,28 +6,19 @@ Write a code using switch statements, which do the below things -
 
 */
 // Solution to question 1
-let color = "purple";
+let color = "blue";
 
 switch (color) {
     case "red":
-        console.log("Color is red")
-        break;
     case "green":
-        console.log("Color is green")
-        break;
     case "blue":
-        console.log("Color is blue")
+        console.log("Color is red, green or blue")
         break;
     case "purple":
-        console.log("Color is purple")
-        break;
     case "yellow":
-        console.log("Color is yellow")
-        break;
     case "pink":
-        console.log("Color is pink")
+        console.log("Color is purple, yellow or pink")
         break;
-
     default:
         console.log("No color matched")
         break;
