@@ -95,3 +95,9 @@ console.log(rest)
 //We can also set the document object in the browser
 
 // rest.set(document.querySelector('h1'),'Heading')
+
+let map = new Map();
+    map.set("skill", "JavaScript");
+    let keys = [...map.values()];
+    keys.push("Java");
+     console.log(keys);
