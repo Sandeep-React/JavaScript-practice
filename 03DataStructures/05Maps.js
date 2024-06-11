@@ -96,6 +96,15 @@ console.log(rest)
 
 // rest.set(document.querySelector('h1'),'Heading')
 
+
+// Convert an object to a map
+
+console.log(Object.entries(openingHours));
+const hoursMaps = new Map(Object.entries(openingHours));
+console.log(hoursMaps)
+
+
+// Examples
 let map = new Map();
     map.set("skill", "JavaScript");
     let keys = [...map.values()];
