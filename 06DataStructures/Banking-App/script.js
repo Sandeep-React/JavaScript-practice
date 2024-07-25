@@ -69,3 +69,15 @@ const displayMovements = function(movements){
 }
 
 displayMovements(account1.movements)
+
+// display balance
+const calcDisplayBalance = function(acc){
+    let balance = acc.movements.reduce((ac,mov) => {
+        return ac + mov
+    },0)
+    console.log("final balance:", balance)
+    labelBalance.textContent = ` ${balance} EUR`
+}
+
+calcDisplayBalance(account1)
+
