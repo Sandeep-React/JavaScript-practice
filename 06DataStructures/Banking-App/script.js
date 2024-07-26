@@ -43,7 +43,7 @@ const containerMovements = document.querySelector('.movement')
 
 const btnLogin = document.querySelector('.login__btn');
 const btnTransfer = document.querySelector('.form__btn--transfer');
-const btnLoan = document.querySelector('form__btn--loan');
+const btnLoan = document.querySelector('.form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
 
@@ -71,11 +71,11 @@ const displayMovements = function(movements){
 
 // display balance
 const calcDisplayBalance = function(acc){
-    let balance = acc.movements.reduce((ac,mov) => {
+    acc.balance = acc.movements.reduce((ac,mov) => {
         return ac + mov
     },0)
     // console.log("final balance:", balance)
-    labelBalance.textContent = ` ${balance} EUR`
+    labelBalance.textContent = ` ${acc.balance} EUR`
 }
 
 
@@ -112,11 +112,18 @@ const createUsername = function(accs){
 }
 createUsername(accounts);
 
+const updateUI = function(acc){
+    displayMovements(acc.movements)
+    calcDisplayBalance(acc)
+    calcDisplaySummary(acc)
+}
+
 // Login button event
 
 btnLogin.addEventListener('click', function(e){
     e.preventDefault(); // prevent refreshing the page.
     currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value)
+    console.log(currentAccount)
     
 
     if(currentAccount?.pin === Number(inputLoginPin.value)){
@@ -126,10 +133,66 @@ btnLogin.addEventListener('click', function(e){
         // clear input for login form
         inputLoginUsername.value = inputLoginPin.value = "";
         
-displayMovements(currentAccount.movements)
-calcDisplayBalance(currentAccount)
-calcDisplaySummary(currentAccount)
+        // update UI
+
+        updateUI(currentAccount)
 
     }
 })
 
+
+// Transfer function
+    btnTransfer.addEventListener('click', function(e){
+        e.preventDefault();
+        const amount =  Number(inputTransferAmount.value);
+        const recieverAccount = accounts.find(acc => acc.username === inputTransferTo.value)
+        // console.log(recieverAccount)
+        inputTransferTo.value = inputTransferAmount.value = ""
+
+        if (amount > 0 && recieverAccount && currentAccount.balance > amount && recieverAccount.username !== currentAccount.username){
+            // console.log("transfer is valid")
+            currentAccount.movements.push(-amount);
+            recieverAccount.movements.push(amount);
+
+
+            // console.log("current accout", currentAccount)
+            // console.log("reciever acc", recieverAccount)
+
+            updateUI(currentAccount)
+
+        }
+    })
+
+
+    btnClose.addEventListener('click', function(e){
+        e.preventDefault();
+        console.log("Account close requested")
+
+        if(inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin){
+            
+            const index = accounts.findIndex(acc => acc.username === currentAccount.username)
+            
+            accounts.splice(index, 1)
+            containerApp.style.opacity = 0;
+
+            labelWelcome.textContent = 'Login to get started'
+        }
+        inputCloseUsername.pin.value = inputClosePin.value = " ";
+    });
+
+    // request loan 
+
+    btnLoan.addEventListener("click", function(e){
+        e.preventDefault()
+        console.log("Loan Requested")
+
+        const amount = Number(inputLoanAmount.value);
+
+        if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1))
+
+            currentAccount.movements.push(amount)
+            updateUI(currentAccount)
+
+            inputLoanAmount.value = ""
+
+    })
