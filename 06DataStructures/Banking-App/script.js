@@ -47,7 +47,7 @@ const btnLoan = document.querySelector('form__btn--loan');
 const btnClose = document.querySelector('.form__btn--close');
 const btnSort = document.querySelector('.btn--sort');
 
-const inputLoginUser = document.querySelector('.login__input--user');
+const inputLoginUsername = document.querySelector('.login__input--user');
 const inputLoginPin = document.querySelector('.login__input--pin');
 const inputTransferTo = document.querySelector('.form__input--to')
 const inputTransferAmount = document.querySelector('.form__input--amount')
@@ -68,7 +68,6 @@ const displayMovements = function(movements){
         })
 }
 
-displayMovements(account1.movements)
 
 // display balance
 const calcDisplayBalance = function(acc){
@@ -79,7 +78,6 @@ const calcDisplayBalance = function(acc){
     labelBalance.textContent = ` ${balance} EUR`
 }
 
-calcDisplayBalance(account1)
 
 const calcDisplaySummary = function (acc){
     //Income calculation
@@ -99,12 +97,39 @@ const calcDisplaySummary = function (acc){
     // Interest calculation
     const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2)/ 100)
+    .map(deposit => (deposit * acc.interestRate)/ 100)
     .filter((int,i,arr) => {return int > 1})
     .reduce((acc, int) => acc + int,0);
     labelSumInterest.textContent = `${interest.toFixed(2)} Eur`
 
 }
 
-calcDisplaySummary(account1)
+
+const createUsername = function(accs){
+    accs.forEach(function(acc){
+        acc.username = acc.owner.toLowerCase().split(' ').map(name => name [0]). join('')
+    })
+}
+createUsername(accounts);
+
+// Login button event
+
+btnLogin.addEventListener('click', function(e){
+    e.preventDefault(); // prevent refreshing the page.
+    currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value)
+    
+
+    if(currentAccount?.pin === Number(inputLoginPin.value)){
+        labelWelcome.textContent = `Welcome back ${currentAccount.owner.split(' ')[0]}`
+        containerApp.style.opacity = 100;
+
+        // clear input for login form
+        inputLoginUsername.value = inputLoginPin.value = "";
+        
+displayMovements(currentAccount.movements)
+calcDisplayBalance(currentAccount)
+calcDisplaySummary(currentAccount)
+
+    }
+})
 
