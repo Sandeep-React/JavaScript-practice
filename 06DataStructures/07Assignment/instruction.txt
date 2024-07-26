@@ -1,0 +1,15 @@
+Assignment
+1. Create Html, CSS, and Javascript files and link them. 
+Define the initial balance and transaction history array.
+
+2. Get the necessary DOM elements using document.getElementById.
+
+3. Define the functions for updating the balance and transaction history, 
+which use balanceEl.textContent and transactionHistoryEl.innerHTML to update the DOM with the current balance and transaction history, 
+respectively.
+
+4. Define the functions for depositing and withdrawing money, which updates the balance, transaction history, 
+and DOM elements using the previously defined functions.
+
+5. Add event listeners to the deposit and withdraw buttons, 
+which prompt the user for an amount and call the appropriate deposit or withdrawal function based on the button that was clicked.
