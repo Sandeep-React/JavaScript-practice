@@ -1,0 +1,17 @@
+1. Create a basic HTML structure for the banking application. This should include a form with select fields from account to account, 
+input amount to transfer, and a button to submit the form. Additionally, create two sections to display the transaction history for each account.
+
+2. Define the initial account balances as an object. Each account should have a balance and an empty array to hold transaction history.
+
+3. Define a function to handle money transfers between accounts. This function should take the from account to account, 
+and amount as parameters. Inside the function, check if both accounts exist and if the from account has enough balance 
+to make the transfer. If the transfer is successful, update the account balances, add the transaction to both accounts, 
+update the transaction history display, show a success message, and reset the transfer form.
+
+4. Define a function to update the transaction history display for each account. This function should loop through all 
+accounts and update the transaction history display for each account. It should first clear any existing transaction history 
+and then loop through all transactions for the account and add them to the list.
+
+5. Add an event listener to the form's submit button to handle form submissions. This event listener should prevent the default 
+form submission behavior and instead call the transfer function with the form input values. Additionally, call the transaction 
+history update function to update the transaction history display for both accounts.
