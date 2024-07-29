@@ -178,6 +178,31 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts);
 
+//Clock
+
+const startLogoutTimer = function(){
+  const tick = function(){
+    const min = String(Math.trunc(time /60)).padStart(2,0);
+    const seconds = String(time % 60).padStart(2,0);
+
+  labelTimer.textContent = `${min}:${seconds}`;
+
+  time--
+  
+  if(time === 0) {
+    clearInterval(timer)
+    labelWelcome.textContent = "Login to get started"
+    containerApp.style.opacity = 0
+  }
+  
+}
+
+let time = 120;
+tick()
+ const timer = setInterval(tick,1000)
+
+}
+
 const updateUI = function (acc) {
   // Display movements
   displayMovements(acc);
@@ -252,6 +277,8 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+
+    startLogoutTimer()
 
     // Update UI
     updateUI(currentAccount);

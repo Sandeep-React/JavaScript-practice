@@ -1,0 +1,6 @@
+Write HTML, CSS, and JavaScript code to create a stopwatch page using the concepts of setInterval, setTimeout, 
+Intl.DateTimeFormat and padStart(). The page should include an attractive CSS design with buttons to start and stop the 
+timer and a reset button to reset the timer. The page should display the timer in an hour:minute: second format and update 
+it every second. Additionally, the page should display the current date, time, and day and update the date, time, and day 
+accordingly.
+
