@@ -42,3 +42,11 @@ if(ingred.includes('olives')){
 console.log("Here is my pizza")
 
 
+//Set interval
+
+setInterval(() => {
+    const now = new Date()
+    console.log(now)
+},1000)
+
+
