@@ -1,0 +1,5 @@
+Assignment
+Write HTML, CSS, and JavaScript code to create a form that accepts a user's name, and date of birth, 
+and generates a random account number. The program should also calculate the age from the given date of birth, 
+display the name, age, and account number, and determine whether the age is even or odd. 
+The form should insert the user's data dynamically using DOM manipulation.
