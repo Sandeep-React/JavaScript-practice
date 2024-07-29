@@ -26,7 +26,7 @@ const account1 = {
     '2020-07-12T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'en-US', // de-DE
 };
 
 const account2 = {
@@ -46,7 +46,7 @@ const account2 = {
     '2020-07-26T12:01:20.894Z',
   ],
   currency: 'USD',
-  locale: 'en-US',
+  locale: 'pt-PT',
 };
 
 const accounts = [account1, account2];
@@ -81,6 +81,24 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 
+const formatMovementDate = function(date, locale){
+  const calcDaysPassed = (date1 , date2) =>
+    Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24))
+
+  const daysPassed = calcDaysPassed(new Date(),date)
+
+  if (daysPassed == 0) return 'Today';
+  if (daysPassed == 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+  else{
+
+    return new Intl.DateTimeFormat(locale).format(date)
+  }
+  
+}
+
+
+
 const displayMovements = function (acc,) {
   containerMovements.innerHTML = '';
 
@@ -92,12 +110,10 @@ const displayMovements = function (acc,) {
     
 
     const date = new Date(acc.movementsDates[i]);
-console.log(date);
-const day = `${date.getDate()}`.padStart(2,0)
-const month = `${date.getMonth() + 1}`.padStart(2,0)
-const year = date.getFullYear()
 
-const dateLabel = `${day}/ ${month}/ ${year}`
+
+
+const dateLabel = formatMovementDate(date, acc.locale);
 
     const html = `
       <div class="movements__row">
@@ -167,20 +183,30 @@ const updateUI = function (acc) {
 let currentAccount;
 
 //Fake login --- TEMPORARY
-currentAccount = account1
-containerApp.style.opacity = 100;
-updateUI(currentAccount)
+// currentAccount = account1
+// containerApp.style.opacity = 100;
+// updateUI(currentAccount)
 //-------------------------
 
-const dateNow = new Date();
-console.log(dateNow);
-const day = `${dateNow.getDate()}`.padStart(2,0)
-const month = `${dateNow.getMonth() + 1}`.padStart(2,0)
-const year = dateNow.getFullYear()
-const hours = `${dateNow.getHours() + 1}`.padStart(2,0)
-const minutes = `${dateNow.getMinutes() + 1}`.padStart(2,0)
+// const dateNow = new Date();
 
-labelDate.textContent = `${day}/${month}/${year}, ${hours}:${minutes}`
+// const options = {
+//   hours: "numeric",
+//   minutes: "numeric",
+//   day: "numeric",
+//   month: "numeric",
+//   year : "numeric"
+// }
+
+// labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale,options).format(dateNow)
+// console.log(dateNow);
+// const day = `${dateNow.getDate()}`.padStart(2,0)
+// const month = `${dateNow.getMonth() + 1}`.padStart(2,0)
+// const year = dateNow.getFullYear()
+// const hours = `${dateNow.getHours() + 1}`.padStart(2,0)
+// const minutes = `${dateNow.getMinutes() + 1}`.padStart(2,0)
+
+// labelDate.textContent = `${day}/${month}/${year}, ${hours}:${minutes}`
 
 
 btnLogin.addEventListener('click', function (e) {
@@ -193,10 +219,23 @@ btnLogin.addEventListener('click', function (e) {
   console.log(currentAccount);
 
   if (currentAccount?.pin === +(inputLoginPin.value)) {
-    // Display UI and message
+    // Display UI and message 
     labelWelcome.textContent = `Welcome back, ${
       currentAccount.owner.split(' ')[0]
     }`;
+
+    const dateNow = new Date();
+    const options = {
+        hour: "numeric",
+        minutes: "numeric",
+        day: "numeric",
+        month: "numeric",
+        year : "numeric"
+      }
+      
+      labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, options).format(dateNow)
+
+
     containerApp.style.opacity = 100;
 
     // Clear input fields
