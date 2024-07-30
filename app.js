@@ -13,3 +13,4 @@ const mappedArr = arr.map(val => {
     console.log(i);
   }
 });
+
