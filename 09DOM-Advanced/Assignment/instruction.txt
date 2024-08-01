@@ -1,0 +1,5 @@
+Assignment
+Write a small program to give a demo of event bubbling and event capturing. As per the screenshot, when we click Child1, 
+the console should demonstrate event bubbling. 
+Similarly, when we click Child 2, 
+the console should demonstrate event capturing.
