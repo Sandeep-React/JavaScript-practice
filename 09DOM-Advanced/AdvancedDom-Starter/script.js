@@ -2,6 +2,7 @@
 
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 =    document.querySelector('#section--1')
+const nav = document.querySelector('.nav')
 
 btnScrollTo.addEventListener('click',function(e){
 
@@ -69,6 +70,59 @@ document.querySelector('.nav__links').addEventListener('click',function(e){
 })
 
 
+//Sticky Navigation
+
+// const initialCoords = section1.getBoundingClientRect()
+// console.log(initialCoords)
+
+// window.addEventListener('scroll', function(e){
+//     // console.log(e)
+//     // console.log(window.scrollY)
+
+//     // if(this.window.scrollY > 333){
+//     //     // console.log("Nav is sticky")
+//     // }
+
+//     if(window.scrollY > initialCoords.top){
+//         nav.classList.add('sticky')
+//     }else{
+//         nav.classList.remove('sticky')
+//     }
+// })
+
+
+// Sticky Navigation-- Intersection Observer API
+
+// const obsCallBack = function(entries, observer){
+//     entries.forEach(entry => console.log(entry))
+// }
+
+// const obsOptions = {
+//     root:null,
+//     threshold:0.1
+// }
+
+// const observer = new IntersectionObserver(obsCallBack,obsOptions);
+
+// observer.observe(section1)
+
+const header = document.querySelector('.header')
+
+const stickyNav = function(entries){
+    const [entry] = entries;
+
+    if(!entry.isIntersecting) nav.classList.add('sticky');
+    else nav.classList.remove('sticky')
+}
+
+const headerObserver = new IntersectionObserver(stickyNav,{
+    root:null,
+    threshold:0
+})
+
+headerObserver.observe(header)
+
+
 
 
 // Practical Application onn Event Propagation
@@ -132,3 +186,58 @@ console.log(h1.parentElement.children);
     if(el !==h1) el.style.transform = 'scale(0.5)'
 })
 
+
+
+//Tabs component--
+
+const tabs = document.querySelectorAll('.operations__tab');
+const tabContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+//bad approach
+// tabs.forEach((t) => {
+//     t.addEventListener('click',function(){
+//         console.log("clicked")
+//     })
+// })
+
+// efficent approach
+tabContainer.addEventListener('click', function(e){
+    // console.log("tabs")
+    // const clicked = e.target;
+    // const clicked = e.target.parentElement;
+    const clicked = e.target.closest('.operations__tab ')
+    console.log(clicked)
+
+    // remove active class
+    if(!clicked) return
+    tabs.forEach(t => t.classList.remove('operations__tab--active'));
+
+    tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+    clicked.classList.add('operations__tab--active')
+    document.querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active')
+})
+
+
+// Menu fade animation
+    const handleHover = function(e){
+        if (e.target.classList.contains('nav__link')){
+            const link = e.target;
+            const siblings = link.closest('.nav').querySelectorAll('.nav__link')
+            const logo = link.closest('.nav').querySelector('img')
+    
+            siblings.forEach(el => {
+                if (el !== link){
+                    el.style.opacity = this
+                }
+            })
+            
+            logo.style.opacity = this
+        }
+    }
+
+nav.addEventListener('mouseover', handleHover.bind(0.5))
+
+nav.addEventListener('mouseout', handleHover.bind(1))
