@@ -8,16 +8,16 @@ btnScrollTo.addEventListener('click',function(e){
 
     // Coordinates for the section
     const s1coords = section1.getBoundingClientRect()
-    console.log(s1coords)
+    // console.log(s1coords)
     
     // Coordinates for the button
-    console.log(e.target.getBoundingClientRect())
+    // console.log(e.target.getBoundingClientRect())
 
     // tells how far we have scrolled
-    console.log("Current X-Y scroll", window.pageXOffset,window.pageYOffset)
+    // console.log("Current X-Y scroll", window.pageXOffset,window.pageYOffset)
 
     // Tells the viewport height and width
-    console.log("height/Width", document.documentElement.clientHeight,document.documentElement.clientWidth)
+    // console.log("height/Width", document.documentElement.clientHeight,document.documentElement.clientWidth)
 
     // Implementation of scroll feature 
 
@@ -125,6 +125,35 @@ headerObserver.observe(header)
 
 
 
+// reveal section animation
+
+const allSections = document.querySelectorAll('.section')
+const revealSection = function(entries, observer){
+    // entries.forEach(entry => console.log(entry))
+
+    const [entry] = entries;
+
+    if(!entry.isIntersecting) return;
+
+    entry.target.classList.remove('section--hidden')
+
+    observer.unobserve(entry.target)
+}
+
+const sectionObserver = new IntersectionObserver(revealSection,{
+    root:null,
+    threshold:0.15
+})
+
+allSections.forEach(function(section){
+    section.classList.add('section--hidden')
+    sectionObserver.observe(section)
+})
+
+
+
+
+
 // Practical Application onn Event Propagation
 
 // const randomInt = (min,max) => 
@@ -156,35 +185,35 @@ headerObserver.observe(header)
 
 // Navigating the DOM Tree
  
-const h1 = document.querySelector('h1')
+// const h1 = document.querySelector('h1')
 
 //child selection
 
 // console.log(h1.childNodes)
-console.log(h1.children)
-console.log(h1.firstElementChild)
-console.log(h1.lastElementChild)
+// console.log(h1.children)
+// console.log(h1.firstElementChild)
+// console.log(h1.lastElementChild)
 // h1.firstElementChild.style.color ='white'
 // h1.lastElementChild.style.color ='orange'
 
 // going upwards -- Parents
 
-console.log(h1.parentNode)
-console.log(h1.parentElement)
+// console.log(h1.parentNode)
+// console.log(h1.parentElement)
 
 // h1.closest('.header').style.background = 'orange'
 // h1.closest('h1').style.backgroundColor = 'green'
 
 // siblings
 
-console.log(h1.previousElementSibling)
-console.log(h1.nextElementSibling)
+// console.log(h1.previousElementSibling)
+// console.log(h1.nextElementSibling)
 
-console.log(h1.parentElement.children);
+// console.log(h1.parentElement.children);
 
-[...h1.parentElement.children].forEach((el) => {
-    if(el !==h1) el.style.transform = 'scale(0.5)'
-})
+// [...h1.parentElement.children].forEach((el) => {
+//     if(el !==h1) el.style.transform = 'scale(0.5)'
+// })
 
 
 
@@ -207,7 +236,7 @@ tabContainer.addEventListener('click', function(e){
     // const clicked = e.target;
     // const clicked = e.target.parentElement;
     const clicked = e.target.closest('.operations__tab ')
-    console.log(clicked)
+    // console.log(clicked)
 
     // remove active class
     if(!clicked) return
