@@ -155,7 +155,7 @@ allSections.forEach(function(section){
 
 const imgTargets = document.querySelectorAll('img[data-src]')
 
-const loadImg = function(entries,Observer){
+const loadImg = function(entries,observer){
     const [entry] = entries;
 
     if (!entry.isIntersecting) return;
@@ -175,7 +175,53 @@ const imgObserver = new IntersectionObserver(loadImg,{
 imgTargets.forEach(img => imgObserver.observe(img))
 
 
+// Creating a slider component
 
+const slider = document.querySelector('.slider')
+const slides = document.querySelectorAll('.slide')
+
+const btnRight = document.querySelector('.slider__btn--right')
+const btnLeft = document.querySelector('.slider__btn--left')
+
+let curSlide = 0 ; // current slide
+const maxSlide = slides.length;
+
+slider.style.overflow = 'visible'
+slider.style.transform = 'scale(0.5)'
+
+slides.forEach((s,i) =>{
+    s.style.transform = `translateX(${100* (i)}%)`
+})
+
+function goToSlide (slide){
+    slides.forEach((s,i) =>{
+        s.style.transform = `translateX(${100* (i-slide)}%)`
+    })
+}
+
+btnRight.addEventListener('click', function(){
+   
+    if(curSlide === maxSlide - 1){
+        curSlide = 0
+    } else {
+        curSlide ++
+    }
+
+    goToSlide(curSlide)
+    
+})
+
+btnLeft.addEventListener('click', function(){
+    
+    if(curSlide === 0){
+        curSlide = maxSlide -1
+    }else{
+        curSlide -- 
+    }
+    
+    goToSlide(curSlide)
+    
+})
 
 
 
