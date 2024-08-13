@@ -1,5 +1,5 @@
 // Encapsulation: Protected Properties and Methods
-// Another Example of Class Implementation
+
 
 class Account {
     constructor(owner,currency, pin,){
