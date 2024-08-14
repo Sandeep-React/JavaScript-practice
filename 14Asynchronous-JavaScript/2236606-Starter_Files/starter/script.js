@@ -5,17 +5,10 @@ const countriesContainer = document.querySelector(".countries");
 
 ///////////////////////////////////////
 
-const getCountryData = function (country) {
-  const request = new XMLHttpRequest();
-  request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
-  request.send();
-  request.addEventListener("load", function () {
-    // console.log(JSON.parse(this.responseText))
-    const [data] = JSON.parse(this.responseText);
-    console.log(data);
+const renderCountry = function(data, className = ""){
 
-    const html = `
-     <article class="country">
+  const html = `
+     <article class="country ${className}">
           <img class="country__img" src="${data.flags.png}" />
           <div class="country__data">
             <h3 class="country__name">${data.name.common}</h3>
@@ -28,9 +21,78 @@ const getCountryData = function (country) {
     `;
     countriesContainer.insertAdjacentHTML("beforeend", html);
     countriesContainer.style.opacity = 1;
-  });
-};
 
-getCountryData('india')
-getCountryData('usa')
-getCountryData('germany')
+    
+}
+  
+//   const getCountryData = function (country) {
+//   const request = new XMLHttpRequest();
+//   request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
+//   request.send();
+//   request.addEventListener("load", function () {
+//     // console.log(JSON.parse(this.responseText))
+//     const [data] = JSON.parse(this.responseText);
+//     console.log(data);
+//     renderCountry(data)
+
+    
+//   });
+// };
+
+// getCountryData('india')
+// getCountryData('usa')
+// getCountryData('germany')
+
+//function of getting countries along with the neighbor
+
+// call back hell 
+
+
+const getCountryAndNeighbour = function (country) {
+    const request = new XMLHttpRequest();
+    request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
+    request.send();
+    request.addEventListener("load", function () {
+      // console.log(JSON.parse(this.responseText))
+      const [data] = JSON.parse(this.responseText);
+      console.log(data);
+      renderCountry(data)
+
+      // get neighbour data 
+
+      const [neighbor] = data.borders;
+      console.log(neighbor)
+
+      // Ajax call for neighbor 
+
+      const request2 = new XMLHttpRequest();
+      request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbor}`);
+      request2.send()
+      request2.addEventListener('load', function(){
+        console.log(JSON.parse(this.responseText))
+        const [data2] = JSON.parse(this.responseText)
+        renderCountry(data2, 'neighbour')
+      })
+  
+      
+    });
+  };
+  getCountryAndNeighbour('india')
+
+  // Example of simple Callback hell
+
+  setTimeout(() => {
+    console.log("1 Second Passed")
+      setTimeout(() => {
+        console.log(" 2 Second Passed")
+        setTimeout(() => {
+          console.log("3 Second Passed")
+            setTimeout(() => {
+              console.log(" 4 Second Passed")
+              setTimeout(() => {
+                console.log(" 5 Second Passed")
+            },1000)
+          },1000)
+        },1000)
+    },1000)
+  },1000)
