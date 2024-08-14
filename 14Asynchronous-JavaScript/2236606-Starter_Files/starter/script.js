@@ -81,18 +81,37 @@ const getCountryAndNeighbour = function (country) {
 
   // Example of simple Callback hell
 
-  setTimeout(() => {
-    console.log("1 Second Passed")
-      setTimeout(() => {
-        console.log(" 2 Second Passed")
-        setTimeout(() => {
-          console.log("3 Second Passed")
-            setTimeout(() => {
-              console.log(" 4 Second Passed")
-              setTimeout(() => {
-                console.log(" 5 Second Passed")
-            },1000)
-          },1000)
-        },1000)
-    },1000)
-  },1000)
+  // setTimeout(() => {
+  //   console.log("1 Second Passed")
+  //     setTimeout(() => {
+  //       console.log(" 2 Second Passed")
+  //       setTimeout(() => {
+  //         console.log("3 Second Passed")
+  //           setTimeout(() => {
+  //             console.log(" 4 Second Passed")
+  //             setTimeout(() => {
+  //               console.log(" 5 Second Passed")
+  //           },1000)
+  //         },1000)
+  //       },1000)
+  //   },1000)
+  // },1000)
+
+    // AJAX request
+  // const request = new XMLHttpRequest();
+  // request.open("GET", `https://restcountries.com/v3.1/name/india`);
+  // request.send();
+
+  // Using Fetch 
+  const request = fetch('https://restcountries.com/v3.1/name/india')
+  console.log(request) // We get promise
+
+  // Promise is an object container for a future request.
+  // Chain promise --
+  
+  // Pending  - Initiated but nothing happend
+  // Settled  - We have received the result
+
+  // Fulfilled - Completed
+  // Rejected - An error occured
+  
