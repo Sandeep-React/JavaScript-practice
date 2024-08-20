@@ -20,11 +20,17 @@ const renderCountry = function(data, className = ""){
         </article>
     `;
     countriesContainer.insertAdjacentHTML("beforeend", html);
-    countriesContainer.style.opacity = 1;
-
+    // countriesContainer.style.opacity = 1;
     
-}
+    
+  }
   
+  const renderError = function(msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg)
+  // countriesContainer.style.opacity = 1;
+}
+
+
 //   const getCountryData = function (country) {
 //   const request = new XMLHttpRequest();
 //   request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
@@ -135,6 +141,8 @@ const renderCountry = function(data, className = ""){
 
   // Chaining promises 
 
+  //Handling Promise reject
+
   const getCountryData = function(country){
     fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(response => response.json())
@@ -147,6 +155,15 @@ const renderCountry = function(data, className = ""){
      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
     }).then(response => response.json())
       .then(data => renderCountry(data[0], 'neighbour'))
+      .catch(err =>{
+        console.log(`${err} error`)
+        renderError(`Something went wrong 😐 😐 😐 ${err.message}. Please try again` )
+      }).finally( () =>{
+        countriesContainer.style.opacity = 1;
+      })
   }
 
-  getCountryData('india')
+  
+  btn.addEventListener('click', function(){
+    getCountryData('india') 
+  })
