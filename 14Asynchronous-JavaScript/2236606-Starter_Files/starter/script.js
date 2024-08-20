@@ -48,36 +48,36 @@ const renderCountry = function(data, className = ""){
 // call back hell 
 
 
-const getCountryAndNeighbour = function (country) {
-    const request = new XMLHttpRequest();
-    request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
-    request.send();
-    request.addEventListener("load", function () {
-      // console.log(JSON.parse(this.responseText))
-      const [data] = JSON.parse(this.responseText);
-      console.log(data);
-      renderCountry(data)
+// const getCountryAndNeighbour = function (country) {
+//     const request = new XMLHttpRequest();
+//     request.open("GET", `https://restcountries.com/v3.1/name/${country}`);
+//     request.send();
+//     request.addEventListener("load", function () {
+//       // console.log(JSON.parse(this.responseText))
+//       const [data] = JSON.parse(this.responseText);
+//       console.log(data);
+//       renderCountry(data)
 
-      // get neighbour data 
+//       // get neighbour data 
 
-      const [neighbor] = data.borders;
-      console.log(neighbor)
+//       const [neighbor] = data.borders;
+//       console.log(neighbor)
 
-      // Ajax call for neighbor 
+//       // Ajax call for neighbor 
 
-      const request2 = new XMLHttpRequest();
-      request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbor}`);
-      request2.send()
-      request2.addEventListener('load', function(){
-        console.log(JSON.parse(this.responseText))
-        const [data2] = JSON.parse(this.responseText)
-        renderCountry(data2, 'neighbour')
-      })
+//       const request2 = new XMLHttpRequest();
+//       request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbor}`);
+//       request2.send()
+//       request2.addEventListener('load', function(){
+//         console.log(JSON.parse(this.responseText))
+//         const [data2] = JSON.parse(this.responseText)
+//         renderCountry(data2, 'neighbour')
+//       })
   
       
-    });
-  };
-  getCountryAndNeighbour('india')
+//     });
+//   };
+//   getCountryAndNeighbour('india')
 
   // Example of simple Callback hell
 
@@ -103,8 +103,8 @@ const getCountryAndNeighbour = function (country) {
   // request.send();
 
   // Using Fetch 
-  const request = fetch('https://restcountries.com/v3.1/name/india')
-  console.log(request) // We get promise
+  // const request = fetch('https://restcountries.com/v3.1/name/india')
+  // console.log(request) // We get promise
 
   // Promise is an object container for a future request.
   // Chain promise --
@@ -114,4 +114,31 @@ const getCountryAndNeighbour = function (country) {
 
   // Fulfilled - Completed
   // Rejected - An error occured
+
   
+  
+  // How to consume promise
+
+  // const getCountryData = function(country){
+  //   fetch(`https://restcountries.com/v3.1/name/${country}`)
+  //   .then(function(response){
+  //     // console.log(response)
+  //     return response.json()
+  //   })
+  //   .then(function(data){
+  //     console.log(data)
+  //     renderCountry(data[0])
+  //   })
+  // }
+
+  // Using arrow function
+
+  const getCountryData = function(country){
+    fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then((data) => {
+      renderCountry(data[0])
+    });
+  }
+
+  getCountryData('india')
