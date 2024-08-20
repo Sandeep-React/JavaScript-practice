@@ -1,0 +1,26 @@
+//10.Coding Challenge
+//1. First, create an HTML file with a button and a div element where the jokes will be displayed:
+
+
+/* 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chuck Norris Jokes</title>
+  </head>
+  <body>
+    <button onclick="getJoke()">Get Chuck Norris Joke</button>
+    <div id="joke-container"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
+ */
+
+/*  2. Next, create a JavaScript file that will handle the XMLHttpRequest to get the Chuck Norris jokes. 
+You can use the Chuck Norris API (https://api.chucknorris.io/) to get the jokes.  */
+
+
+
+/*  3 . When the button is clicked, the getJoke function will send a GET request to the Chuck Norris API 
+and retrieve a random joke. The response will be a JSON object, which we can parse and extract the value 
+property which contains the actual joke. Finally, we display the joke in the joke-container div element.  */
