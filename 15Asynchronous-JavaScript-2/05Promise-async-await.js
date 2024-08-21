@@ -1,6 +1,6 @@
 // Consuming Promises with async/wait 
 
-const whereAmI = async function name() {
+const whereAmI = async function () {
     console.log("This id from async function")
     const res = await fetch(`https://api.github.com/users/Sandeep-React`)
     const data = await res .json();
