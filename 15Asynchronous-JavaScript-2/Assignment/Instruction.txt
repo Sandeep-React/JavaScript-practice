@@ -1,0 +1,26 @@
+Assignment
+----------
+Create an account object with a balance of 500 dollars and an empty transactions array.
+
+Define an async withdraw function that takes an amount as an argument. 
+
+If the amount is greater than the account balance, throw an "Insufficient funds" error. 
+
+Otherwise, subtract the amount from the account balance, add a withdrawal transaction to the transactions array, 
+and wait for the delay function to complete.
+
+Define an async deposit function that takes an amount as an argument. 
+
+Add the amount to the account balance, add a deposit transaction to the transactions array, 
+and wait for the delay function to complete.
+
+Define an async getAccountData function that fetches the account balance and transaction data using Promise. 
+all to wait for two separate promises to resolve.
+
+Return an object with the balance message and transactions array.
+
+Define a main function that logs a welcome message, calls the deposit and withdraw functions with sample amounts, 
+
+calls the getAccountData function to fetch and log the account data, and handles any errors using try/catch.
+
+Call the main function to run the bank app program.
