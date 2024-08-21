@@ -10,7 +10,7 @@ const whereAmI = async function () {
         const res = await fetch(`https://api.github.com/users/Sandeep-React`)
         const data = await res .json();
         console.log(data)
-    }catch{
+    }catch(err){
         console.err(err.message);
         console.log('Where am i error', error)
         
